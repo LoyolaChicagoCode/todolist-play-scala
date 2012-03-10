@@ -1,0 +1,12 @@
+target
+project/boot
+project/target
+project/plugins/target
+*~
+.target
+.settings
+.cache
+.project
+.classpath
+logs
+RUNNING_PID
