@@ -13,9 +13,7 @@ object Application extends Controller {
     "label" -> nonEmptyText
   )
 
-  def index = Action {
-    Redirect(routes.Application.tasks)
-  }
+  def index = tasks
 
   def tasks = Action {
     Ok(views.html.index(Task.all(), taskForm))
@@ -27,6 +25,8 @@ object Application extends Controller {
       label => {
         Task.create(label)
         Redirect(routes.Application.tasks)
+        // internal forward:
+        // tasks(request)
       }
     )
   }
@@ -34,6 +34,10 @@ object Application extends Controller {
   def deleteTask(id: Long) = Action {
     Task.delete(id)
     Redirect(routes.Application.tasks)
+    // internal forward:
+    // tasks
+    // but Redirect is more RESTful
+    // (URL shown in browser corresponds to resource displayed)
   }
 
 }
